@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamerTag Generator - Neon Soft</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gamer: {
+                            dark: '#0b0f19',
+                            card: '#131a2c',
+                            border: '#1e2942',
+                            accent1: '#00f2fe', /* Cian suave */
+                            accent2: '#4facfe', /* Azul gamer */
+                            accent3: '#f355da', /* Magenta neón suave */
+                        }
+                    },
+                    boxShadow: {
+                        'neon-soft': '0 0 20px rgba(0, 242, 254, 0.15), 0 0 40px rgba(243, 85, 218, 0.1)',
+                        'neon-hover': '0 0 30px rgba(0, 242, 254, 0.3), 0 0 50px rgba(243, 85, 218, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter & Rajdhani para un look tecnológico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            overflow-x: hidden;
+        }
+        .tech-font {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        /* Animaciones sutiles de fondo */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+        .bg-glow-1 {
+            animation: float-slow 12s ease-in-out infinite;
+        }
+        .bg-glow-2 {
+            animation: float-slow 16s ease-in-out infinite-reverse;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col justify-between relative selection:bg-gamer-accent3/30 selection:text-white">
+
+    <!-- Elementos de brillo ambiental (Neon suave, no molesto) -->
+    <div class="absolute top-1/4 left-1/4 w-[35vw] h-[35vw] bg-gradient-to-tr from-gamer-accent1/10 to-transparent rounded-full filter blur-[120px] pointer-events-none bg-glow-1"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[35vw] h-[35vw] bg-gradient-to-tr from-gamer-accent3/8 to-transparent rounded-full filter blur-[120px] pointer-events-none bg-glow-2"></div>
+
+    <!-- Cabecera de la App -->
+    <header class="w-full max-w-5xl mx-auto px-6 py-6 flex justify-between items-center z-10">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-gamer-accent1 to-gamer-accent3 p-[2px] shadow-lg">
+                <div class="w-full h-full bg-gamer-dark rounded-[10px] flex items-center justify-center">
+                    <svg class="w-5 h-5 text-gamer-accent1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div>
+                <span class="tech-font text-xl font-bold tracking-wider bg-gradient-to-r from-gamer-accent1 to-gamer-accent3 bg-clip-text text-transparent">NEO_TAG</span>
+                <span class="text-[10px] block text-slate-500 tracking-widest font-mono uppercase">System Active</span>
+            </div>
+        </div>
+
+        <!-- Ajustes rápidos (Sonido) -->
+        <button id="soundToggle" class="p-2.5 rounded-lg border border-gamer-border bg-gamer-card/40 hover:bg-gamer-card/80 transition-all text-slate-400 hover:text-gamer-accent1 flex items-center gap-2 text-xs font-mono">
+            <svg id="soundOnIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+            </svg>
+            <svg id="soundOffIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+            </svg>
+            <span>EFECTOS DE AUDIO</span>
+        </button>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="w-full max-w-xl mx-auto px-6 py-4 flex-grow flex flex-col justify-center z-10">
+        
+        <!-- Titulo Central -->
+        <div class="text-center mb-8">
+            <h1 class="tech-font text-4xl md:text-5xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gamer-accent1 to-gamer-accent3 uppercase" style="filter: drop-shadow(0 0 10px rgba(0,242,254,0.2));">
+                GENERADOR DE NICKS
+            </h1>
+        </div>
+
+        <!-- Contenedor de la interfaz principal -->
+        <div class="bg-gamer-card/60 backdrop-blur-md rounded-2xl border border-gamer-border p-6 md:p-8 shadow-neon-soft transition-all duration-300">
+            
+            <!-- Campo de Entrada -->
+            <div class="mb-6">
+                <label for="inputName" class="block tech-font text-xs font-bold tracking-widest text-slate-400 mb-3 uppercase">
+                    Escribe tu nombre aquí
+                </label>
+                <div class="relative group">
+                    <input type="text" id="inputName" placeholder="Ej: Alberto" autocomplete="off" maxlength="25"
+                        class="w-full bg-gamer-dark/80 border border-gamer-border rounded-xl px-5 py-4 text-lg font-semibold text-slate-100 placeholder-slate-600 focus:outline-none focus:border-gamer-accent1/60 focus:ring-1 focus:ring-gamer-accent1/30 transition-all">
+                    <!-- Detalle visual en la esquina para look tecnológico -->
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-600 group-focus-within:text-gamer-accent1/50 transition-colors">
+                        MAX: 25
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de Generar -->
+            <div class="mb-8">
+                <button id="btnGenerate" class="w-full bg-gradient-to-r from-gamer-accent2 to-gamer-accent3 hover:from-gamer-accent1 hover:to-gamer-accent3 text-gamer-dark font-bold py-4 px-6 rounded-xl transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-3 shadow-md hover:shadow-neon-hover group">
+                    <span class="tech-font text-lg tracking-wider uppercase font-extrabold text-slate-900">GENERAR</span>
+                    <svg class="w-5 h-5 text-slate-900 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Campo de Salida -->
+            <div>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="tech-font text-xs font-bold tracking-widest text-slate-400 uppercase">GAMERTAG GENERADO</span>
+                    <span id="copyFeedback" class="text-[10px] font-mono text-gamer-accent1 opacity-0 transition-opacity duration-300">¡COPIADO!</span>
+                </div>
+                
+                <div class="relative group/output">
+                    <div id="outputContainer" class="w-full min-h-[72px] bg-gamer-dark/90 border border-gamer-border rounded-xl px-5 py-4 flex items-center justify-between transition-all duration-300">
+                        <span id="outputText" class="text-xl md:text-2xl font-mono text-slate-500 italic">Esperando nombre...</span>
+                        
+                        <!-- Botón de copiar -->
+                        <button id="btnCopy" disabled class="p-2 rounded-lg bg-gamer-card border border-gamer-border hover:bg-gamer-dark hover:border-gamer-accent1/40 transition-all text-slate-500 hover:text-gamer-accent1 opacity-50 cursor-not-allowed group-hover/output:opacity-100" title="Copiar al portapapeles">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historial de creados en la sesión -->
+            <div id="historyWrapper" class="mt-8 pt-6 border-t border-gamer-border hidden">
+                <span class="tech-font text-xs font-bold tracking-widest text-slate-500 mb-3 block uppercase">HISTORIAL DE SESIÓN</span>
+                <div id="historyList" class="flex flex-wrap gap-2">
+                    <!-- Los items se agregan dinámicamente -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Notificaciones flotantes internas (en vez de alertas molestas) -->
+    <div id="notificationToast" class="fixed bottom-6 right-6 bg-gamer-card border border-gamer-accent1/30 px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="w-2 h-2 rounded-full bg-gamer-accent1 animate-ping"></div>
+        <span id="notificationText" class="text-xs font-mono text-slate-300"></span>
+    </div>
+
+    <!-- Script principal de lógica de la aplicación -->
+    <script>
+        // Configuración de Audio (Sintetizador Web Audio API) para evitar dependencias externas de archivos de audio
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = true;
+
+        function playSynthSound(type) {
+            if (!soundEnabled) return;
+            
+            // Reanudar context si está en suspensión (políticas de navegadores)
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'click') {
+                // Sonido corto retro "bip" agudo
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } else if (type === 'success') {
+                // Sonido de logro / confirmación ascendente 8-bit
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.08);
+                osc.frequency.setValueAtTime(900, audioCtx.currentTime + 0.16);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        // Elementos DOM
+        const inputName = document.getElementById('inputName');
+        const btnGenerate = document.getElementById('btnGenerate');
+        const outputText = document.getElementById('outputText');
+        const btnCopy = document.getElementById('btnCopy');
+        const copyFeedback = document.getElementById('copyFeedback');
+        const outputContainer = document.getElementById('outputContainer');
+        const soundToggle = document.getElementById('soundToggle');
+        const soundOnIcon = document.getElementById('soundOnIcon');
+        const soundOffIcon = document.getElementById('soundOffIcon');
+        const historyWrapper = document.getElementById('historyWrapper');
+        const historyList = document.getElementById('historyList');
+        const notificationToast = document.getElementById('notificationToast');
+        const notificationText = document.getElementById('notificationText');
+
+        // Registro de historial en sesión
+        const tagHistory = new Set();
+
+        // Mapeo Leet
+        const leetMap = {
+            'a': '4', 'A': '4',
+            'e': '3', 'E': '3',
+            'i': '1', 'I': '1',
+            'o': '0', 'O': '0',
+            's': '5', 'S': '5',
+            't': '7', 'T': '7'
+        };
+
+        // Función de transformación principal
+        function generateGamerTag(name) {
+            // Sanitizar espacios múltiples y sustituir por guiones bajos
+            let cleanName = name.trim().replace(/\s+/g, '_');
+            
+            if (!cleanName) return '';
+
+            // Generar alternancia de mayúsculas y minúsculas (comenzando siempre en minúscula)
+            let alternated = '';
+            for (let i = 0; i < cleanName.length; i++) {
+                if (i % 2 === 0) {
+                    alternated += cleanName[i].toLowerCase();
+                } else {
+                    alternated += cleanName[i].toUpperCase();
+                }
+            }
+
+            // Mapear caracteres a Leet Speak
+            let leetResult = '';
+            for (let char of alternated) {
+                leetResult += leetMap[char] || char;
+            }
+
+            // Aplicar envoltorio gamer clásico
+            return `xX_${leetResult}_Xx`;
+        }
+
+        // Mostrar Notificación Personalizada
+        function showNotification(message) {
+            notificationText.textContent = message;
+            notificationToast.classList.remove('translate-y-20', 'opacity-0');
+            notificationToast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                notificationToast.classList.add('translate-y-20', 'opacity-0');
+                notificationToast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2500);
+        }
+
+        // Agregar al historial de la sesión actual
+        function addToHistory(tag) {
+            if (tagHistory.has(tag)) return;
+            tagHistory.add(tag);
+
+            // Mostrar sección de historial
+            historyWrapper.classList.remove('hidden');
+
+            // Crear pastilla de historial
+            const chip = document.createElement('button');
+            chip.className = "px-3 py-1.5 rounded-lg bg-gamer-dark hover:bg-gamer-card border border-gamer-border hover:border-gamer-accent1/30 text-xs font-mono text-slate-400 hover:text-gamer-accent1 transition-all flex items-center gap-1.5";
+            chip.innerHTML = `
+                <span>${tag}</span>
+                <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                </svg>
+            `;
+
+            // Acción de copiar al hacer clic en el historial
+            chip.addEventListener('click', () => {
+                copyTextToClipboard(tag);
+                playSynthSound('click');
+            });
+
+            // Insertar al inicio de la lista de historial
+            historyList.insertBefore(chip, historyList.firstChild);
+        }
+
+        // Copiar texto de forma segura en iFrames
+        function copyTextToClipboard(text) {
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = text;
+            tempTextArea.style.position = "fixed";  // Evita scroll molesto
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    playSynthSound('success');
+                    
+                    // Feedback visual en el botón principal si corresponde
+                    if (text === outputText.textContent) {
+                        copyFeedback.classList.remove('opacity-0');
+                        outputContainer.classList.add('border-gamer-accent1/60', 'shadow-[0_0_15px_rgba(0,242,254,0.15)]');
+                        
+                        setTimeout(() => {
+                            copyFeedback.classList.add('opacity-0');
+                            outputContainer.classList.remove('border-gamer-accent1/60', 'shadow-[0_0_15px_rgba(0,242,254,0.15)]');
+                        }, 2000);
+                    } else {
+                        showNotification("Copiado al portapapeles");
+                    }
+                } else {
+                    showNotification("No se pudo copiar el texto");
+                }
+            } catch (err) {
+                showNotification("Error al intentar copiar");
+            }
+            
+            document.body.removeChild(tempTextArea);
+        }
+
+        // Evento de Generar
+        function handleGenerate() {
+            const val = inputName.value;
+            if (!val.trim()) {
+                // Alerta sutil integrada
+                showNotification("Escribe un nombre válido primero");
+                return;
+            }
+
+            playSynthSound('click');
+            const result = generateGamerTag(val);
+
+            // Aplicar resultado con animación suave de cambio de opacidad
+            outputText.style.opacity = 0;
+            setTimeout(() => {
+                outputText.textContent = result;
+                outputText.className = "text-xl md:text-2xl font-mono text-gamer-accent1 tracking-wide font-semibold select-all";
+                outputText.style.opacity = 1;
+
+                // Habilitar botón de copiar
+                btnCopy.disabled = false;
+                btnCopy.className = "p-2 rounded-lg bg-gamer-card border border-gamer-border hover:bg-gamer-dark hover:border-gamer-accent1/50 transition-all text-slate-300 hover:text-gamer-accent1 cursor-pointer group-hover/output:opacity-100";
+
+                // Agregar al historial
+                addToHistory(result);
+            }, 150);
+        }
+
+        // Listeners
+        btnGenerate.addEventListener('click', handleGenerate);
+
+        // Permitir presionar "Enter" para generar de forma natural
+        inputName.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleGenerate();
+            }
+        });
+
+        // Evento Copiar
+        btnCopy.addEventListener('click', () => {
+            const currentTag = outputText.textContent;
+            if (currentTag && currentTag !== "Esperando nombre...") {
+                copyTextToClipboard(currentTag);
+            }
+        });
+
+        // Control de sonido
+        soundToggle.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                soundOnIcon.classList.remove('hidden');
+                soundOffIcon.classList.add('hidden');
+                playSynthSound('click');
+            } else {
+                soundOnIcon.classList.add('hidden');
+                soundOffIcon.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
